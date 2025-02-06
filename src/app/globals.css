@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* font-family: "Tiro Bangla", serif; */
+/* font-family: "Inter", serif; */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: "Tiro Bangla", serif;
+}
+
+.inter-font {
+  font-family: "Inter", serif;
+}
+
+p,
+span {
+  color: #616161;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(5%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 10s linear infinite;
+  white-space: nowrap;
+}
+
+.trapezium-shape {
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+}
