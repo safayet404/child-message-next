@@ -32,12 +32,12 @@ export default async function Home() {
   const adImage3 = addData?.data?.home_ad3
     ? `${BASE_API_ASSET}/${addData?.data?.home_ad3}`
     : "";
-  // const adImage4 = addData?.data?.home_ad4
-  //   ? `${BASE_API_ASSET}/${addData?.data?.home_ad4}`
-  //   : "";
-  // const adImage5 = addData?.data?.home_ad5
-  //   ? `${BASE_API_ASSET}/${addData?.data?.home_ad5}`
-  //   : "";
+  const adImage4 = addData?.data?.home_ad4
+    ? `${BASE_API_ASSET}/${addData?.data?.home_ad4}`
+    : "";
+  const adImage5 = addData?.data?.home_ad5
+    ? `${BASE_API_ASSET}/${addData?.data?.home_ad5}`
+    : "";
 
 
   return (
@@ -75,13 +75,13 @@ export default async function Home() {
       <VideoCategorySection />
 
       {categories.length > 5 && (
-        <CategoryFiveSix categories={categories.slice(4, 6)} />
+        <CategoryFiveSix home_ad4={adImage4} categories={categories.slice(4, 6)} />
       )}
 
       <FullWidthServer />
 
       {categories.length > 6 && (
-        <CategoryMissingAndLast categories={categories.slice(6, 8)} />
+        <CategoryMissingAndLast home_ad5={adImage5} categories={categories.slice(6, 8)} />
       )}
     </div>
   );

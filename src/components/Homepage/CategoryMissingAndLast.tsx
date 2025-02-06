@@ -4,13 +4,14 @@ import CategoryTitleTime from "./CategoryTitleTime";
 import MissingNewsTop from "../NewsLayout/MissingNewsTop";
 import MissingNewsMinimal from "../NewsLayout/MissingNewsMinimal";
 import Image from "next/image";
-import adImage from "@/assets/add nike shoe.png";
 
-export default async function CategoryMissingAndLast({
-  categories,
-}: {
+
+interface CategoryMissingAndLastProps {
   categories: { title: string; slug: string; id: string }[];
-}) {
+  home_ad5: string;
+}
+
+export default async function CategoryMissingAndLast({categories,home_ad5} : CategoryMissingAndLastProps) {
   const category = categories[0];
 
   const missingNewsResponse = await fetch(
@@ -53,7 +54,7 @@ export default async function CategoryMissingAndLast({
         <CategoryTitleTime category={category} />
         <div className="h-[200px] w-full mt-6 md:mt-2">
           <Image
-            src={adImage}
+            src={home_ad5 || "path/shoes.jpg"}
             height={400}
             width={400}
             className="w-full h-full"
