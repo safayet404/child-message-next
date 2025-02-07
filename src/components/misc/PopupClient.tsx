@@ -3,7 +3,7 @@
 import { formatImageUrl } from "@/utills/common";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ImCross } from "react-icons/im";
 
 export default function PopupClient({
@@ -15,13 +15,13 @@ export default function PopupClient({
 }) {
   const [isOpen, setIsOpen] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsOpen(false);
-    }, 5000); // Set isOpen to false after 5 seconds
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsOpen(false);
+  //   }, 5000); // Set isOpen to false after 5 seconds
 
-    return () => clearTimeout(timer); // Cleanup timer on unmount
-  }, []);
+  //   return () => clearTimeout(timer); // Cleanup timer on unmount
+  // }, []);
 
   const handleClose = () => {
     setIsOpen(false);

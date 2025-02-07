@@ -30,10 +30,21 @@ export default async function CategoryPage({
 
   // fetch this category data
   const categoryResponse = await fetch(
-    `${BASE_API}/news_categories?filter[slug][_eq]=${slug}&fields=title,id`
+    `${BASE_API}/news_categories?filter[slug][_eq]=${slug}&fields=title,id,ad_image`
   );
   const { data: data1 } = await categoryResponse.json();
   const category = data1 && data1.length ? data1[0] : null;
+
+  const adImageUrl = category?.ad_image ? formatImageUrl(category.ad_image) : fastWashAd;
+
+  console.log("ad image check",adImageUrl);
+  
+  
+
+  //   const adImage1 = addData?.data?.home_ad1
+  //     ? `${BASE_API_ASSET}/${addData?.data?.home_ad1}`
+  //     : "";
+  // const adImageurl = category?.ad_image ? formatImageUrl
 
   // fetch news of this category
   const newsResponse = await fetch(
@@ -130,7 +141,9 @@ export default async function CategoryPage({
           )}
           <div className="relative w-full mt-4 h-[200px]">
             <Image
-              src={fastWashAd}
+              src={adImageUrl}
+              width={500}
+              height={200}
               alt="fast-wash-ad"
               className="rounded-md h-full w-full"
             />

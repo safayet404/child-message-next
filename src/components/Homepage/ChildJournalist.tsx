@@ -4,6 +4,7 @@ import Image from "next/image";
 import { X } from "lucide-react";
 import childJournalist from "@/assets/sishu sangbadik.png";
 import childPresenter from "@/assets/sishu presenter.png";
+import axios from "axios";  // Import axios
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,7 +13,7 @@ interface ModalProps {
 }
 
 interface ChildJournalistProps {
-  home_ad1 : string;
+  home_ad1: string;
 }
 
 const Modal = ({ isOpen, onClose, title }: ModalProps) => {
@@ -31,16 +32,19 @@ const Modal = ({ isOpen, onClose, title }: ModalProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
     try {
-      const response = await fetch("https://cmapi.barrzen.com/items/news_presenter", {
-        method: "POST",
+      // Using POST method to send data
+      const response = await axios({
+        method: "POST", // Define method here
+        url: "https://cmapi.barrzen.com/items/news_presenter", // Endpoint
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        data: formData, // Data to be sent in POST request
       });
-
-      if (response.ok) {
+  
+      if (response.status === 200) {
         alert("Submission successful!");
         onClose();
       } else {
@@ -51,7 +55,6 @@ const Modal = ({ isOpen, onClose, title }: ModalProps) => {
       alert("An error occurred. Please try again.");
     }
   };
-
   if (!isOpen) return null;
 
   return (
@@ -65,7 +68,6 @@ const Modal = ({ isOpen, onClose, title }: ModalProps) => {
         </button>
         <h2 className="text-xl font-semibold mb-4 text-center">{title}</h2>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-
           <label>নাম</label>
           <input
             type="text"
@@ -138,13 +140,12 @@ const Modal = ({ isOpen, onClose, title }: ModalProps) => {
             সাবমিট
           </button>
         </form>
-
       </div>
     </div>
   );
 };
 
-export default  function ChildJournalist({home_ad1} : ChildJournalistProps) {
+export default function ChildJournalist({ home_ad1 }: ChildJournalistProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
 
@@ -154,8 +155,6 @@ export default  function ChildJournalist({home_ad1} : ChildJournalistProps) {
   };
 
   const closeModal = () => setIsModalOpen(false);
-
-
 
   return (
     <div className="grid grid-cols-3 gap-x-4 justify-between mt-8 mb-16">
@@ -167,10 +166,11 @@ export default  function ChildJournalist({home_ad1} : ChildJournalistProps) {
             width={340}
             className="h-full w-full"
             alt="childJournalist"
+            onClick={() => openModal("শিশু সাংবাদিক হতে চাই")}
           />
         </div>
         <p
-          className="bg-primary rounded-b-lg md:rounded-2xl mt-5 h-[50px] text-white flex items-center justify-center text-sm md:text-base font-medium md:font-semibold inter-font cursor-pointer"
+          className="bg-primary rounded-lg md:rounded-2xl mt-5 h-[50px] text-white flex items-center justify-center text-center p-2 text-sm md:text-base font-medium md:font-semibold inter-font cursor-pointer"
           onClick={() => openModal("শিশু সাংবাদিক হতে চাই")}
         >
           শিশু সাংবাদিক হতে চাই
@@ -184,10 +184,11 @@ export default  function ChildJournalist({home_ad1} : ChildJournalistProps) {
             width={340}
             className="h-full w-full"
             alt="childPresenter"
+            onClick={() => openModal("শিশু প্রেজেন্টার হতে চাই")}
           />
         </div>
         <p
-          className="bg-primary rounded-b-lg mt-5 md:rounded-2xl h-[50px] text-white flex items-center justify-center text-sm md:text-base font-medium md:font-semibold inter-font cursor-pointer"
+          className="bg-primary rounded-lg mt-5 md:rounded-2xl h-[50px] text-white flex items-center text-center p-2 justify-center text-sm md:text-base font-medium md:font-semibold inter-font cursor-pointer"
           onClick={() => openModal("শিশু প্রেজেন্টার হতে চাই")}
         >
           শিশু প্রেজেন্টার হতে চাই

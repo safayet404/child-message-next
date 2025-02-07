@@ -14,10 +14,17 @@ import NavigationMenu from "./NavigationMenu";
 import Search from "./Search";
 import MobileNav from "./MobileNav";
 import { BASE_API } from "@/constants/common";
+import { getDate } from "bangla-calendar";
 
 export default async function Header() {
   const todayInBengali = getBengaliDateToday();
   const todayEngDateInBangla = getEnglishDateInBangla(new Date());
+
+  const dateWithDay = getDate(new Date())
+
+  console.log("checcck",dateWithDay);
+  
+
 
   const response = await fetch(
     `${BASE_API}/news_categories?fields=id,title,slug&filter[menu_serial][_gte]=1&filter[status][_eq]=published&sort=menu_serial`
@@ -53,7 +60,7 @@ export default async function Header() {
           </div>
           <div className="hidden md:block">
             <p className="text-black">
-              {todayEngDateInBangla}, {todayInBengali}
+              {dateWithDay} | {todayEngDateInBangla}
             </p>
           </div>
           <div className="flex gap-4 items-center">

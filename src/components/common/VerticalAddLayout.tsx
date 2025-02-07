@@ -1,11 +1,9 @@
 import Image from "next/image";
-import verticalAd from "@/assets/vertical add details page.png";
-
-export default function VerticalAddLayout() {
+export default function VerticalAddLayout({side_ad} :{side_ad : string} ) {
   return (
     <div className="h-[400px]">
       <Image
-        src={verticalAd}
+        src={side_ad || "path/image.jpg"}
         className="h-full w-full"
         width={300}
         height={500}
