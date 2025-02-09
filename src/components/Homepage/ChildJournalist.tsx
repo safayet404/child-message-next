@@ -32,18 +32,10 @@ const Modal = ({ isOpen, onClose, title }: ModalProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     try {
-      // Using POST method to send data
-      const response = await axios({
-        method: "POST", // Define method here
-        url: "https://cmapi.barrzen.com/items/news_presenter", // Endpoint
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: formData, // Data to be sent in POST request
-      });
-  
+      const response = await axios.post("/api/proxy", formData);
+
       if (response.status === 200) {
         alert("Submission successful!");
         onClose();
@@ -55,6 +47,7 @@ const Modal = ({ isOpen, onClose, title }: ModalProps) => {
       alert("An error occurred. Please try again.");
     }
   };
+
   if (!isOpen) return null;
 
   return (
@@ -69,74 +62,24 @@ const Modal = ({ isOpen, onClose, title }: ModalProps) => {
         <h2 className="text-xl font-semibold mb-4 text-center">{title}</h2>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <label>নাম</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="আপনার নাম লিখুন"
-            className="border p-2 rounded"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="name" placeholder="আপনার নাম লিখুন" className="border p-2 rounded" value={formData.name} onChange={handleChange} required />
 
           <label>বাবার নাম</label>
-          <input
-            type="text"
-            name="father_name"
-            placeholder="আপনার বাবার নাম লিখুন"
-            className="border p-2 rounded"
-            value={formData.father_name}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="father_name" placeholder="আপনার বাবার নাম লিখুন" className="border p-2 rounded" value={formData.father_name} onChange={handleChange} required />
 
           <label>মায়ের নাম</label>
-          <input
-            type="text"
-            name="mother_name"
-            placeholder="আপনার মায়ের নাম লিখুন"
-            className="border p-2 rounded"
-            value={formData.mother_name}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="mother_name" placeholder="আপনার মায়ের নাম লিখুন" className="border p-2 rounded" value={formData.mother_name} onChange={handleChange} required />
 
           <label>শ্রেনী</label>
-          <input
-            type="text"
-            name="class"
-            placeholder="আপনার শ্রেনী লিখুন"
-            className="border p-2 rounded"
-            value={formData.class}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="class" placeholder="আপনার শ্রেনী লিখুন" className="border p-2 rounded" value={formData.class} onChange={handleChange} required />
 
           <label>জেলা</label>
-          <input
-            type="text"
-            name="district"
-            placeholder="আপনার জেলা লিখুন"
-            className="border p-2 rounded"
-            value={formData.district}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="district" placeholder="আপনার জেলা লিখুন" className="border p-2 rounded" value={formData.district} onChange={handleChange} required />
 
           <label>মোবাইল</label>
-          <input
-            type="text"
-            name="mobile"
-            placeholder="আপনার মোবাইল নাম্বার লিখুন"
-            className="border p-2 rounded"
-            value={formData.mobile}
-            onChange={handleChange}
-            required
-          />
-          <button
-            type="submit"
-            className="bg-primary text-white py-2 rounded-lg font-semibold"
-          >
+          <input type="text" name="mobile" placeholder="আপনার মোবাইল নাম্বার লিখুন" className="border p-2 rounded" value={formData.mobile} onChange={handleChange} required />
+
+          <button type="submit" className="bg-primary text-white py-2 rounded-lg font-semibold">
             সাবমিট
           </button>
         </form>
@@ -144,7 +87,6 @@ const Modal = ({ isOpen, onClose, title }: ModalProps) => {
     </div>
   );
 };
-
 export default function ChildJournalist({ home_ad1 }: ChildJournalistProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");

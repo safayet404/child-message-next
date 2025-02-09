@@ -37,9 +37,7 @@ export default async function CategoryPage({
 
   const adImageUrl = category?.ad_image ? formatImageUrl(category.ad_image) : fastWashAd;
 
-  console.log("ad image check",adImageUrl);
-  
-  
+
 
   //   const adImage1 = addData?.data?.home_ad1
   //     ? `${BASE_API_ASSET}/${addData?.data?.home_ad1}`

@@ -17,9 +17,14 @@ export default async function NewsDetails({
 
   // Fetch data for the news details
   const newsResponse = await fetch(
-    `${BASE_API}/news?filter[slug][_eq]=${slug}&fields=title,summary_description,main_image,description,created_at,updated_at,category_id,category_id.title,category_id.id,category_id.slug`
+    `${BASE_API}/news?filter[slug][_eq]=${slug}&fields=title,summary_description,main_image,description,created_at,updated_at,category_id,category_id.title,category_id.id,category_id.slug,news_details_ad`
   );
   const { data } = await newsResponse.json();
+  const newsJson = data && data.length ? data[0] : null
+  const adImage = newsJson?.news_details_ad ? formatImageUrl(newsJson.news_details_ad) : fastWashAd
+
+  console.log("image check",adImage);
+  
 
   if (!data || data.length === 0) {
     return (
@@ -86,8 +91,10 @@ export default async function NewsDetails({
           )}
           <div className="relative w-full mt-4 h-[200px]">
             <Image
-              src={fastWashAd}
+              src={adImage}
               alt="fast-wash-ad"
+              width={500}
+              height={200}
               className="rounded-md h-full w-full"
             />
           </div>

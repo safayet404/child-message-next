@@ -7,8 +7,8 @@ import CategoryThreeFour from "@/components/Homepage/CategoryThreeFour";
 import VideoCategorySection from "@/components/Homepage/VideoCategorySection";
 import CategoryFiveSix from "@/components/Homepage/CategoryFiveSix";
 import CategoryMissingAndLast from "@/components/Homepage/CategoryMissingAndLast";
-import Popup from "@/components/misc/Popup";
 import FullWidthServer from "@/components/Homepage/FullWidthServer";
+import Popup from "@/components/misc/Popup";
 
 export const runtime = "edge";
 
@@ -20,7 +20,7 @@ export default async function Home() {
   const { data: categories } = await categoriesResponse.json();
 
 
-  const addResponse = await fetch(`${BASE_API}/ads`, { cache: "no-cache" })
+  const addResponse = await fetch(`${BASE_API}/ads?ts=${new Date().getTime()}`)
   const addData = await addResponse.json()
 
   const adImage1 = addData?.data?.home_ad1
@@ -43,7 +43,8 @@ export default async function Home() {
   return (
     <div>
       {/* popup add */}
-      <Popup />
+      <Popup/>
+     
 
       {/* Top news section */}
       <TopSection />

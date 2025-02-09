@@ -7,7 +7,6 @@ import {
   FaYoutube,
   FaVideo,
 } from "react-icons/fa";
-import getBengaliDateToday from "@/utills/getBengaliDateToday";
 import getEnglishDateInBangla from "@/utills/getEnglishDateInBangla";
 import Link from "next/link";
 import NavigationMenu from "./NavigationMenu";
@@ -17,7 +16,7 @@ import { BASE_API } from "@/constants/common";
 import { getDate } from "bangla-calendar";
 
 export default async function Header() {
-  const todayInBengali = getBengaliDateToday();
+  
   const todayEngDateInBangla = getEnglishDateInBangla(new Date());
 
   const dateWithDay = getDate(new Date())
@@ -37,6 +36,7 @@ export default async function Header() {
         <MobileNav categories={categories} />
         <Search className="block md:hidden" />
       </div>
+
       {/* logo */}
       <Link href="/" className="justify-self-center">
         <div className="w-[80px] md:w-[180px]">
@@ -50,6 +50,8 @@ export default async function Header() {
         </div>
       </Link>
       <div className="md:w-full mt-1 flex md:justify-between justify-self-end md:block">
+
+        
         {/* menu top section */}
         <div className="flex justify-between items-center">
           <div className="hidden md:flex gap-4 items-center">
